@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        table input{
+    width: 125px;
+    height: 125px;
+    font-size: 100px; 
+    background-color: white;
+    border: none;
+}
+
+.fRow td{
+    border-bottom: solid;
+    border-right: solid;
+    border-width: 5px;
+    padding: 0px;
+}
+
+.fRow td.end{
+    border-right: hidden;
+}
+
+.sRow td{
+    border-bottom: solid;
+    border-right: solid;
+    border-width: 5px;
+    padding: 0px;
+}
+
+.sRow td.end{
+    border-right: hidden;
+}
+
+.tRow td{
+    border-bottom: solid;
+    border-right: solid;
+    border-width: 5px;
+    padding: 0px;
+}
+
+.tRow td.end{
+    border-right: hidden;
+}
+
+.foRow td{
+    border-right: solid;
+    border-width: 5px;
+    padding: 0px;
+}
+
+.foRow td.end{
+    border-right: hidden;
+}
+
+    </style>
+    <title>Document</title>
+</head>
+<body>
+    <table style="width:50%; text-align:center;">
+        <tr class="fRow">
+
+            <td><input type="button" id="b11" value="   " onClick="change(this.id)"></input>
+            <td><input type="button" id="b12" value="   " onClick="change(this.id)"></input>
+            <td><input type="button" id="b13" value="   " onClick="change(this.id)"></input>
+            <td class="end"><input type="button" id="b14" value="   " onClick="change(this.id)"></input> 
+
+       </tr>
+        <tr class="sRow">
+
+            <td><input type="button" id="b21" value="   " onClick="change(this.id)"></input>
+            <td><input type="button" id="b22" value="   " onClick="change(this.id)"></input>
+            <td><input type="button" id="b23" value="   " onClick="change(this.id)"></input>
+            <td class="end"><input type="button" id="b24" value="   " onClick="change(this.id)"></input>
+
+        </tr>
+        <tr class="tRow">
+
+            <td><input type="button" id="b31" value="   " onClick="change(this.id)"></input>
+            <td><input type="button" id="b32" value="   " onClick="change(this.id)"></input>
+            <td><input type="button" id="b33" value="   " onClick="change(this.id)"></input>
+            <td class="end"><input type="button" id="b34" value="   " onClick="change(this.id)"></input>
+
+        </tr>
+        <tr class="foRow">
+
+            <td><input type="button" id="b41" value="   " onClick="change(this.id)"></input>
+            <td><input type="button" id="b42" value="   " onClick="change(this.id)"></input>
+            <td><input type="button" id="b43" value="   " onClick="change(this.id)"></input>
+            <td class="end"><input type="button" id="b44" value="   " onClick="change(this.id)"></input>
+
+        </tr>
+      </table>
+      <br>
+      <input type="button" id="reset" value="Reset" onClick="conf()"></input>
+
+
+
+</body>
+</html>
+
+
+
+
+<script>
+
+const cpu = ["b11","b12","b13","b14","b21","b22","b23","b24","b31","b32","b33","b34","b41","b42","b43","b44"];
+var xFlag = 0;
+var oFlag = 0;
+const x = [];
+const o = [];
+
+
+function conf() {
+    var box = confirm("Pressng OK will reset the board.");
+    if (box == true) {
+        location.reload();
+}
+}
+
+function rand( lowest, highest){      
+    return Math.floor((Math.random()*highest) + parseInt(lowest));
+}
+
+function cpChoice(){
+    return cpu[rand(0,15)];
+}
+
+function xMove(id){
+    document.getElementById(id).value = "X"; 
+        document.getElementById(id).disabled = true;
+        x.push(id);
+        if(xFlag>3){
+            document.getElementById(x[xFlag-4]).value = "   "; 
+            document.getElementById(x[xFlag-4]).disabled = false;
+            x.shift();        
+            xFlag--;
+        }
+        xFlag++;
+}
+
+function oMove(id){
+    var move = cpChoice();
+        while(document.getElementById(move).disabled == true){
+            if(document.getElementById("b44").disabled != true){
+                move = "b44";
+            }
+            else{
+                move = cpChoice();
+            }
+        }
+        
+        document.getElementById(move).value = "O"; 
+        document.getElementById(move).disabled = true;
+        o.push(move);
+        if(oFlag>3){
+            document.getElementById(o[oFlag-4]).value = "   "; 
+            document.getElementById(o[oFlag-4]).disabled = false;
+            o.shift();
+            oFlag--;
+        }
+        oFlag++;
+}
+
+function toWinX(){
+    if(document.getElementById(cpu[0]).value == "X" && document.getElementById(cpu[1]).value == "X"
+            && document.getElementById(cpu[2]).value == "X" && document.getElementById(cpu[3]).value == "X"){
+                alert("X wins");
+                for(var i = 0; i<cpu.length; i++){
+                    if(document.getElementById(cpu[i]).disabled != true){
+                    document.getElementById(cpu[i]).disabled = true;
+                    }
+                }
+            }
+        if(document.getElementById(cpu[4]).value == "X" && document.getElementById(cpu[5]).value == "X"
+            && document.getElementById(cpu[6]).value == "X" && document.getElementById(cpu[7]).value == "X"){
+                alert("X wins");
+                for(var i = 0; i<cpu.length; i++){
+                    if(document.getElementById(cpu[i]).disabled != true){
+                    document.getElementById(cpu[i]).disabled = true;
+                    }
+                }
+            }
+        if(document.getElementById(cpu[8]).value == "X" && document.getElementById(cpu[9]).value == "X"
+            && document.getElementById(cpu[10]).value == "X" && document.getElementById(cpu[11]).value == "X"){
+                alert("X wins");
+                for(var i = 0; i<cpu.length; i++){
+                    if(document.getElementById(cpu[i]).disabled != true){
+                    document.getElementById(cpu[i]).disabled = true;
+                    }
+                }
+            }
+        if(document.getElementById(cpu[12]).value == "X" && document.getElementById(cpu[13]).value == "X"
+            && document.getElementById(cpu[14]).value == "X" && document.getElementById(cpu[15]).value == "X"){
+                alert("X wins");
+                for(var i = 0; i<cpu.length; i++){
+                    if(document.getElementById(cpu[i]).disabled != true){
+                    document.getElementById(cpu[i]).disabled = true;
+                    }
+                }
+            }
+            if(document.getElementById(cpu[0]).value == "X" && document.getElementById(cpu[4]).value == "X"
+            && document.getElementById(cpu[8]).value == "X" && document.getElementById(cpu[12]).value == "X"){
+                alert("X wins");
+                for(var i = 0; i<cpu.length; i++){
+                    if(document.getElementById(cpu[i]).disabled != true){
+                    document.getElementById(cpu[i]).disabled = true;
+                    }
+                }
+            }
+        if(document.getElementById(cpu[1]).value == "X" && document.getElementById(cpu[5]).value == "X"
+            && document.getElementById(cpu[9]).value == "X" && document.getElementById(cpu[13]).value == "X"){
+                alert("X wins");
+                for(var i = 0; i<cpu.length; i++){
+                    if(document.getElementById(cpu[i]).disabled != true){
+                    document.getElementById(cpu[i]).disabled = true;
+                    }
+                }
+            }
+        if(document.getElementById(cpu[2]).value == "X" && document.getElementById(cpu[6]).value == "X"
+            && document.getElementById(cpu[10]).value == "X" && document.getElementById(cpu[14]).value == "X"){
+                alert("X wins");
+                for(var i = 0; i<cpu.length; i++){
+                    if(document.getElementById(cpu[i]).disabled != true){
+                    document.getElementById(cpu[i]).disabled = true;
+                    }
+                }
+            }
+        if(document.getElementById(cpu[3]).value == "X" && document.getElementById(cpu[7]).value == "X"
+            && document.getElementById(cpu[11]).value == "X" && document.getElementById(cpu[15]).value == "X"){
+                alert("X wins");
+                for(var i = 0; i<cpu.length; i++){
+                    if(document.getElementById(cpu[i]).disabled != true){
+                    document.getElementById(cpu[i]).disabled = true;
+                    }
+                }
+            }
+        if(document.getElementById(cpu[0]).value == "X" && document.getElementById(cpu[5]).value == "X"
+            && document.getElementById(cpu[10]).value == "X" && document.getElementById(cpu[15]).value == "X"){
+                alert("X wins");
+                for(var i = 0; i<cpu.length; i++){
+                    if(document.getElementById(cpu[i]).disabled != true){
+                    document.getElementById(cpu[i]).disabled = true;
+                    }
+                }
+            }
+        if(document.getElementById(cpu[3]).value == "X" && document.getElementById(cpu[6]).value == "X"
+            && document.getElementById(cpu[9]).value == "X" && document.getElementById(cpu[12]).value == "X"){
+                alert("X wins");
+                for(var i = 0; i<cpu.length; i++){
+                    if(document.getElementById(cpu[i]).disabled != true){
+                    document.getElementById(cpu[i]).disabled = true;
+                    }
+                }
+            }
+}
+
+function toWinO(){
+    if(document.getElementById(cpu[0]).value == "O" && document.getElementById(cpu[1]).value == "O"
+            && document.getElementById(cpu[2]).value == "O" && document.getElementById(cpu[3]).value == "O"){
+                alert("O wins");
+                for(var i = 0; i<cpu.length; i++){
+                    if(document.getElementById(cpu[i]).disabled != true){
+                    document.getElementById(cpu[i]).disabled = true;
+                    }
+                }
+            }
+        if(document.getElementById(cpu[4]).value == "O" && document.getElementById(cpu[5]).value == "O"
+            && document.getElementById(cpu[6]).value == "O" && document.getElementById(cpu[7]).value == "O"){
+                alert("O wins");
+                for(var i = 0; i<cpu.length; i++){
+                    if(document.getElementById(cpu[i]).disabled != true){
+                    document.getElementById(cpu[i]).disabled = true;
+                    }
+                }
+            }
+        if(document.getElementById(cpu[8]).value == "O" && document.getElementById(cpu[9]).value == "O"
+            && document.getElementById(cpu[10]).value == "O" && document.getElementById(cpu[11]).value == "O"){
+                alert("O wins");
+                for(var i = 0; i<cpu.length; i++){
+                    if(document.getElementById(cpu[i]).disabled != true){
+                    document.getElementById(cpu[i]).disabled = true;
+                    }
+                }
+            }
+        if(document.getElementById(cpu[12]).value == "O" && document.getElementById(cpu[13]).value == "O"
+            && document.getElementById(cpu[14]).value == "O" && document.getElementById(cpu[15]).value == "O"){
+                alert("O wins");
+                for(var i = 0; i<cpu.length; i++){
+                    if(document.getElementById(cpu[i]).disabled != true){
+                    document.getElementById(cpu[i]).disabled = true;
+                    }
+                }
+            }
+            if(document.getElementById(cpu[0]).value == "O" && document.getElementById(cpu[4]).value == "O"
+            && document.getElementById(cpu[8]).value == "O" && document.getElementById(cpu[12]).value == "O"){
+                alert("O wins");
+                for(var i = 0; i<cpu.length; i++){
+                    if(document.getElementById(cpu[i]).disabled != true){
+                    document.getElementById(cpu[i]).disabled = true;
+                    }
+                }
+            }
+        if(document.getElementById(cpu[1]).value == "O" && document.getElementById(cpu[5]).value == "O"
+            && document.getElementById(cpu[9]).value == "O" && document.getElementById(cpu[13]).value == "O"){
+                alert("O wins");
+                for(var i = 0; i<cpu.length; i++){
+                    if(document.getElementById(cpu[i]).disabled != true){
+                    document.getElementById(cpu[i]).disabled = true;
+                    }
+                }
+            }
+        if(document.getElementById(cpu[2]).value == "O" && document.getElementById(cpu[6]).value == "O"
+            && document.getElementById(cpu[10]).value == "O" && document.getElementById(cpu[14]).value == "O"){
+                alert("O wins");
+                for(var i = 0; i<cpu.length; i++){
+                    if(document.getElementById(cpu[i]).disabled != true){
+                    document.getElementById(cpu[i]).disabled = true;
+                    }
+                }
+            }
+        if(document.getElementById(cpu[3]).value == "O" && document.getElementById(cpu[7]).value == "O"
+            && document.getElementById(cpu[11]).value == "O" && document.getElementById(cpu[15]).value == "O"){
+                alert("O wins");
+                for(var i = 0; i<cpu.length; i++){
+                    if(document.getElementById(cpu[i]).disabled != true){
+                    document.getElementById(cpu[i]).disabled = true;
+                    }
+                }
+            }
+        if(document.getElementById(cpu[0]).value == "O" && document.getElementById(cpu[5]).value == "O"
+            && document.getElementById(cpu[10]).value == "O" && document.getElementById(cpu[15]).value == "O"){
+                alert("O wins");
+                for(var i = 0; i<cpu.length; i++){
+                    if(document.getElementById(cpu[i]).disabled != true){
+                    document.getElementById(cpu[i]).disabled = true;
+                    }
+                }
+            }
+        if(document.getElementById(cpu[3]).value == "O" && document.getElementById(cpu[6]).value == "O"
+            && document.getElementById(cpu[9]).value == "O" && document.getElementById(cpu[12]).value == "O"){
+                alert("O wins");
+                for(var i = 0; i<cpu.length; i++){
+                    if(document.getElementById(cpu[i]).disabled != true){
+                    document.getElementById(cpu[i]).disabled = true;
+                    }
+                }
+            }    
+}
+
+function change(id) { 
+
+        xMove(id);
+        oMove(id);
+       
+        toWinX();
+        toWinO();
+        
+}
+
+</script>

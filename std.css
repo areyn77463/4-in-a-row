@@ -1,0 +1,50 @@
+table input{
+    width: 125px;
+    height: 125px;
+    font-size: 100px; 
+    background-color: white;
+    border: none;
+}
+
+.fRow td{
+    border-bottom: solid;
+    border-right: solid;
+    border-width: 5px;
+    padding: 0px;
+}
+
+.fRow td.end{
+    border-right: hidden;
+}
+
+.sRow td{
+    border-bottom: solid;
+    border-right: solid;
+    border-width: 5px;
+    padding: 0px;
+}
+
+.sRow td.end{
+    border-right: hidden;
+}
+
+.tRow td{
+    border-bottom: solid;
+    border-right: solid;
+    border-width: 5px;
+    padding: 0px;
+}
+
+.tRow td.end{
+    border-right: hidden;
+}
+
+.foRow td{
+    border-right: solid;
+    border-width: 5px;
+    padding: 0px;
+}
+
+.foRow td.end{
+    border-right: hidden;
+}
